@@ -1,0 +1,22 @@
+{
+  "name": "geofenceServer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazetora/geofence.git"
+  },
+  "author": "Pratama Putra (putra@nakao-lab.org)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kazetora/geofence/issues"
+  },
+  "homepage": "https://github.com/kazetora/geofence#readme",
+  "dependencies": {
+    "restify": "*"
+  }
+}

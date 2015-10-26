@@ -52,8 +52,40 @@ console.log("update active area");
   var response = _self.template;
 
   console.log(params);
+  var gju = require('geojson-utils');
+  var async = require('async');
 
-  res.send(response);
+  var point = params.point;
+  var areas = prams.area;
+
+  var activeContents = [];
+  async.each(areas, function(area_item, callback){
+    var coords = area.coords;
+    var polygon = [];
+    async.each(coords, function(coorditem, callback_in){
+      polygon.push([coorditem.lat, coorditem.lng]);
+      callback_in();
+    }, function(err){
+      if(gju.pointInPolygon({"type":"Point", "coordinates": point},
+                            {"type": "Polygon", "coordinates": [polygon]})) {
+        var cuids = areas.cuids;
+        activeContents = activeContents.concat(cuids.filter(function(item){
+          return activeContents.indexOf(item) < 0;
+        }));
+        callback();
+      }
+    });
+  }, function(err) {
+    if(err) {
+      console.error('ERROR: Geo fencing failed');
+      response.result = -1;
+    }
+    else {
+      _self.activeArea = activeContents;
+      response.data = _self.activeArea;
+    }
+    res.send(response);
+  });
 }
 
 module.exports = GeofenceServer;

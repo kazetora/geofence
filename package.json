@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/kazetora/geofence#readme",
   "dependencies": {
-    "restify": "*"
+    "restify": "*",
+    "geojson-utils": "1.1.0",
+    "async" : "1.5.0"
   }
 }

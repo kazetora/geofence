@@ -51,16 +51,17 @@ console.log("update active area");
   var params = req.params;
   var response = _self.template;
 
-  console.log(params);
+  //console.log(params);
   var gju = require('geojson-utils');
   var async = require('async');
 
   var point = params.point;
-  var areas = prams.area;
+  var areas = params.area;
+console.log(areas);
 
   var activeContents = [];
   async.each(areas, function(area_item, callback){
-    var coords = area.coords;
+    var coords = area_item.coords;
     var polygon = [];
     async.each(coords, function(coorditem, callback_in){
       polygon.push([coorditem.lat, coorditem.lng]);
@@ -68,12 +69,13 @@ console.log("update active area");
     }, function(err){
       if(gju.pointInPolygon({"type":"Point", "coordinates": point},
                             {"type": "Polygon", "coordinates": [polygon]})) {
-        var cuids = areas.cuids;
+        var cuids = area_item.cuids;
+console.log(cuids);
         activeContents = activeContents.concat(cuids.filter(function(item){
           return activeContents.indexOf(item) < 0;
         }));
-        callback();
       }
+      callback();
     });
   }, function(err) {
     if(err) {

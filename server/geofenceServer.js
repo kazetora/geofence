@@ -57,7 +57,7 @@ console.log("update active area");
 
   var point = params.point;
   var areas = params.area;
-console.log(areas);
+//console.log(areas);
 
   var activeContents = [];
   async.each(areas, function(area_item, callback){

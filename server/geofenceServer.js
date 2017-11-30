@@ -38,7 +38,7 @@ GeofenceServer.prototype.start = function(){
 }
 
 GeofenceServer.prototype.getActiveArea = function(req, res, next) {
-console.log("get active area");
+//console.log("get active area");
   var _self = this;
   var response = _self.template;
   response.data = _self.activeArea;
@@ -46,7 +46,6 @@ console.log("get active area");
 }
 
 GeofenceServer.prototype.updateActiveArea = function(req, res, next) {
-console.log("update active area");
   var _self = this;
   var params = req.params;
   var response = _self.template;
@@ -70,7 +69,6 @@ console.log("update active area");
       if(gju.pointInPolygon({"type":"Point", "coordinates": point},
                             {"type": "Polygon", "coordinates": [polygon]})) {
         var cuids = area_item.cuids;
-console.log(cuids);
         activeContents = activeContents.concat(cuids.filter(function(item){
           return activeContents.indexOf(item) < 0;
         }));
